@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>List a donation — FoodShare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="index.html" class="nav-brand"><span class="dot"></span>FoodShare</a>
+    <div class="nav-links">
+      <span id="whoBadge" style="font-size:.85rem;color:#5c5e50;"></span>
+      <a href="dashboard.html">View listings</a>
+    </div>
+  </div>
+</nav>
+
+<div class="form-shell">
+  <div class="form-card wide">
+    <h1>List surplus food</h1>
+    <p class="sub">Add details so nearby NGOs and volunteers can be matched to this donation.</p>
+
+    <div class="msg" id="formMsg"></div>
+
+    <form id="donateForm" novalidate>
+      <div class="field">
+        <label for="item">Food item</label>
+        <input type="text" id="item" placeholder="e.g. Vegetable Biryani">
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="qty">Quantity</label>
+          <input type="text" id="qty" placeholder="e.g. 10 kg / 20 plates">
+        </div>
+        <div class="field">
+          <label for="type">Food type</label>
+          <select id="type">
+            <option>Veg</option>
+            <option>Non-Veg</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="location">Pickup city</label>
+          <input type="text" id="location" placeholder="e.g. Salem">
+        </div>
+        <div class="field">
+          <label for="expiresIn">Collect within</label>
+          <input type="text" id="expiresIn" placeholder="e.g. 2 hrs / 1 day">
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">List this donation</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
