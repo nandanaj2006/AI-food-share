@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Available donations — FoodShare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="index.html" class="nav-brand"><span class="dot"></span>FoodShare</a>
+    <div class="nav-links">
+      <a href="donate.html">List a donation</a>
+    </div>
+  </div>
+</nav>
+
+<div class="dash-top">
+  <div class="container">
+    <div>
+      <h1 style="font-size:1.5rem;margin-bottom:.1em;">Available donations</h1>
+      <p style="margin:0;color:#5c5e50;font-size:.92rem;">Sorted by pickup urgency</p>
+    </div>
+    <span class="who-badge" id="whoBadge">Guest view</span>
+  </div>
+</div>
+
+<div class="dash-wrap">
+  <div class="container">
+    <div class="dash-filters">
+      <select id="locationFilter"></select>
+      <select id="typeFilter">
+        <option value="all">All types</option>
+        <option value="Veg">Veg</option>
+        <option value="Non-Veg">Non-Veg</option>
+      </select>
+    </div>
+
+    <table class="listing">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Type</th>
+          <th>Donor</th>
+          <th>Location</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="listingBody"></tbody>
+    </table>
+
+    <div class="empty-state" id="emptyState" style="display:none;">
+      No donations match these filters right now.
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
