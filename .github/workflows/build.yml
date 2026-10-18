@@ -1,0 +1,42 @@
+name: FoodShare Build & Validate
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: List project files (Configuration Identification check)
+        run: |
+          echo "Files under configuration management:"
+          find . -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" \) -not -path "./.git/*"
+
+      - name: Validate HTML files exist and are non-empty (build check)
+        run: |
+          for f in index.html register.html login.html donate.html dashboard.html; do
+            if [ ! -s "$f" ]; then
+              echo "::error::Missing or empty required file: $f"
+              exit 1
+            else
+              echo "OK: $f present"
+            fi
+          done
+
+      - name: Package build artifact
+        run: |
+          mkdir -p build
+          cp -r index.html register.html login.html donate.html dashboard.html css js build/ 2>/dev/null || true
+          cd build && zip -r ../foodshare-build.zip .
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: foodshare-build
+          path: foodshare-build.zip
