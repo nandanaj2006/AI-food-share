@@ -1,65 +1,105 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Available donations — FoodShare</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Dashboard — FoodShare</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <nav class="nav">
-  <div class="container">
-    <a href="index.html" class="nav-brand"><span class="dot"></span>FoodShare</a>
-    <div class="nav-links">
-      <a href="donate.html">List a donation</a>
-    </div>
+  <div class="nav-inner">
+    <a href="index.html" class="brand">Food<span>Share</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="donate.html">Donate food</a></li>
+      <li><a href="dashboard.html" class="active">Dashboard</a></li>
+      <li data-auth="out"><a href="login.html">Log in</a></li>
+      <li data-auth="in" class="hidden">Hi, <span data-user-name></span></li>
+      <li data-auth="in" class="hidden"><a href="#" data-action="logout">Log out</a></li>
+    </ul>
   </div>
 </nav>
 
-<div class="dash-top">
-  <div class="container">
+<div class="container">
+  <div class="dash-head">
     <div>
-      <h1 style="font-size:1.5rem;margin-bottom:.1em;">Available donations</h1>
-      <p style="margin:0;color:#5c5e50;font-size:.92rem;">Sorted by pickup urgency</p>
+      <p class="eyebrow">NGO / volunteer view</p>
+      <h1>Today's pickups</h1>
     </div>
-    <span class="who-badge" id="whoBadge">Guest view</span>
+    <a href="donate.html" class="btn btn-ghost">+ Post a listing</a>
   </div>
+
+  <div class="dash-stats" id="dashStats"></div>
+
+  <table class="listing-table">
+    <thead>
+      <tr>
+        <th>Food</th>
+        <th>Donor</th>
+        <th>Quantity</th>
+        <th>Window</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="listingBody"></tbody>
+  </table>
+  <div id="emptyState" class="empty-state hidden">No listings yet. Be the first to <a href="donate.html">post one</a>.</div>
 </div>
 
-<div class="dash-wrap">
-  <div class="container">
-    <div class="dash-filters">
-      <select id="locationFilter"></select>
-      <select id="typeFilter">
-        <option value="all">All types</option>
-        <option value="Veg">Veg</option>
-        <option value="Non-Veg">Non-Veg</option>
-      </select>
-    </div>
-
-    <table class="listing">
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Quantity</th>
-          <th>Type</th>
-          <th>Donor</th>
-          <th>Location</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody id="listingBody"></tbody>
-    </table>
-
-    <div class="empty-state" id="emptyState" style="display:none;">
-      No donations match these filters right now.
-    </div>
+<footer>
+  <div class="container footer-row">
+    <span>FoodShare — AI-based Leftover Food Redistribution Center</span>
+    <span>SCM Project · Review 3 prototype</span>
   </div>
-</div>
+</footer>
 
-<script src="js/script.js"></script>
+<script src="js/app.js"></script>
+<script>
+function render() {
+  const listings = getListings();
+  const body = document.getElementById('listingBody');
+  const empty = document.getElementById('emptyState');
+  body.innerHTML = '';
+
+  if (!listings.length) {
+    empty.classList.remove('hidden');
+  } else {
+    empty.classList.add('hidden');
+  }
+
+  listings.forEach(l => {
+    const tr = document.createElement('tr');
+    const claimed = l.status === 'claimed';
+    tr.innerHTML = `
+      <td><span class="food-name">${l.food}</span>${l.urgent ? ' <span class="tag tag-urgent" style="margin-left:6px;">Urgent</span>' : ''}</td>
+      <td>${l.donor}</td>
+      <td>${l.qty}</td>
+      <td>${l.expiresIn}</td>
+      <td><span class="tag ${claimed ? 'tag-open' : 'tag-urgent'}">${claimed ? 'Claimed' : 'Open'}</span></td>
+      <td><button class="claim-btn" data-id="${l.id}" ${claimed ? 'disabled' : ''}>${claimed ? 'Claimed' : 'Claim'}</button></td>
+    `;
+    body.appendChild(tr);
+  });
+
+  document.querySelectorAll('.claim-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      claimListing(this.getAttribute('data-id'));
+      render();
+    });
+  });
+
+  const open = listings.filter(l => l.status === 'open').length;
+  const claimedCount = listings.filter(l => l.status === 'claimed').length;
+  document.getElementById('dashStats').innerHTML = `
+    <div class="dash-stat"><span class="num">${open}</span><span class="label">Open listings</span></div>
+    <div class="dash-stat"><span class="num">${claimedCount}</span><span class="label">Claimed today</span></div>
+    <div class="dash-stat"><span class="num">${listings.length}</span><span class="label">Total posted</span></div>
+  `;
+}
+render();
+</script>
 </body>
 </html>

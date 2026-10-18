@@ -1,95 +1,116 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FoodShare — AI-Based Leftover Food Redistribution</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title>FoodShare — Move surplus food before it's wasted</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <nav class="nav">
-  <div class="container">
-    <a href="index.html" class="nav-brand"><span class="dot"></span>FoodShare</a>
-    <div class="nav-links">
-      <a href="index.html#how">How it works</a>
-      <a href="index.html#who">Who it's for</a>
-      <a href="login.html">Sign in</a>
-      <a href="register.html" class="btn btn-primary">Get started</a>
-    </div>
+  <div class="nav-inner">
+    <a href="index.html" class="brand">Food<span>Share</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="donate.html">Donate food</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li data-auth="out"><a href="login.html">Log in</a></li>
+      <li data-auth="out"><a href="register.html" class="btn btn-accent" style="padding:8px 16px;">Sign up</a></li>
+      <li data-auth="in" class="hidden"><a href="#" data-action="logout">Log out</a></li>
+    </ul>
   </div>
 </nav>
 
 <header class="hero">
   <div class="container hero-grid">
     <div>
-      <h1>Good food shouldn't end up in the bin while someone nearby goes hungry.</h1>
-      <p class="lede">FoodShare connects restaurants, hotels, and stores that have surplus food with the NGOs, shelters, and volunteers who can collect and deliver it — matched and prioritised automatically, before it spoils.</p>
+      <p class="eyebrow">Surplus food, matched in minutes</p>
+      <h1>Good food shouldn't go to waste while someone nearby goes hungry.</h1>
+      <p>FoodShare connects restaurants, caterers, and households with leftover food to NGOs and volunteers who can collect and redistribute it — before it spoils.</p>
       <div class="hero-cta">
-        <a href="register.html" class="btn btn-primary">I have food to give</a>
-        <a href="register.html" class="btn btn-outline">I collect for an NGO</a>
+        <a href="donate.html" class="btn btn-primary">List surplus food</a>
+        <a href="dashboard.html" class="btn btn-ghost">View today's pickups</a>
       </div>
     </div>
-    <div>
-      <div class="stat-panel">
-        <span class="stat">1.3B tonnes</span>
-        <span class="stat-label">of food is wasted globally every year, even as people go without meals nearby.</span>
+
+    <div class="board">
+      <div class="board-head">
+        <strong>Today's board</strong>
+        <span class="pulse" aria-hidden="true"></span>
       </div>
-      <div class="stat-panel">
-        <span class="stat">&lt; 30 min</span>
-        <span class="stat-label">target time from a listed donation to a matched pickup.</span>
+      <div class="board-row">
+        <div>
+          <div class="food-name" style="font-weight:600;">Wedding function leftovers</div>
+          <div class="meta">Residency Hall, Adyar · 50 portions</div>
+        </div>
+        <span class="tag tag-urgent">1 hr left</span>
+      </div>
+      <div class="board-row">
+        <div>
+          <div class="food-name" style="font-weight:600;">Rice + sambar</div>
+          <div class="meta">Sharma Catering, T Nagar · 12 portions</div>
+        </div>
+        <span class="tag tag-urgent">2 hrs left</span>
+      </div>
+      <div class="board-row">
+        <div>
+          <div class="food-name" style="font-weight:600;">Mixed vegetable sabzi + rotis</div>
+          <div class="meta">Green Leaf Mess, Velachery · 8 portions</div>
+        </div>
+        <span class="tag tag-open">4 hrs left</span>
+      </div>
+      <div class="board-row">
+        <div>
+          <div class="food-name" style="font-weight:600;">Bakery surplus — bread & buns</div>
+          <div class="meta">Daily Bread Bakery · 30 pieces</div>
+        </div>
+        <span class="tag tag-open">6 hrs left</span>
       </div>
     </div>
   </div>
 </header>
 
-<section class="how" id="how">
+<section class="steps">
   <div class="container">
-    <h2>How a donation moves</h2>
-    <div class="how-grid">
-      <div class="how-card">
-        <div class="idx">List it</div>
-        <h3>A donor posts surplus food</h3>
-        <p>Restaurants, hostels, and stores log what's left over, how much, and by when it needs to be collected.</p>
+    <h2>From extra plate to someone's meal</h2>
+    <p>Three steps, built around how surplus food actually moves.</p>
+    <div class="steps-grid">
+      <div class="step">
+        <span class="step-num">01</span>
+        <h3>List it</h3>
+        <p>A donor posts what's left over, how much, and how soon it needs to be collected.</p>
       </div>
-      <div class="how-card">
-        <div class="idx">Match it</div>
-        <h3>The system prioritises requests</h3>
-        <p>Nearby NGOs and volunteers are ranked by urgency, distance, and capacity so the neediest match happens first.</p>
+      <div class="step">
+        <span class="step-num">02</span>
+        <h3>Get matched</h3>
+        <p>Nearby NGOs and volunteers see it on their dashboard the moment it's posted.</p>
       </div>
-      <div class="how-card">
-        <div class="idx">Deliver it</div>
-        <h3>A volunteer completes pickup</h3>
-        <p>Route and pickup details are shared instantly, and the delivery is logged for full transparency.</p>
+      <div class="step">
+        <span class="step-num">03</span>
+        <h3>Collect & redistribute</h3>
+        <p>A volunteer claims the listing and picks it up before the window closes.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="who" id="who">
-  <div class="container">
-    <h2>Built for everyone in the chain</h2>
-    <ul class="who-list">
-      <li>Restaurants &amp; hotels</li>
-      <li>Catering services</li>
-      <li>Supermarkets &amp; grocery stores</li>
-      <li>Educational institutions &amp; hostels</li>
-      <li>NGOs &amp; charitable organisations</li>
-      <li>Volunteers</li>
-      <li>Government food welfare departments</li>
-      <li>Homeless shelters &amp; orphanages</li>
-      <li>Disaster relief organisations</li>
-    </ul>
+<section class="container">
+  <div class="stats">
+    <div class="stat"><span class="num">4</span><span class="label">Active listings today</span></div>
+    <div class="stat"><span class="num">100</span><span class="label">Portions available now</span></div>
+    <div class="stat"><span class="num">6 hrs</span><span class="label">Longest pickup window</span></div>
+    <div class="stat"><span class="num">0</span><span class="label">Portions wasted</span></div>
   </div>
 </section>
 
 <footer>
-  <div class="container">
-    AI-Based Leftover Food Redistribution Center — SCM course project prototype.
+  <div class="container footer-row">
+    <span>FoodShare — AI-based Leftover Food Redistribution Center</span>
+    <span>SCM Project · Review 3 prototype</span>
   </div>
 </footer>
 
+<script src="js/app.js"></script>
 </body>
 </html>
